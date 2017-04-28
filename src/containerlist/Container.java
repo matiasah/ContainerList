@@ -22,6 +22,7 @@ public class Container {
 
     public Container(ContainerList list, int elements) {
 
+        this.list = list;
         this.content = new Object[elements];
 
     }
@@ -97,7 +98,7 @@ public class Container {
         if (this.nElements < this.content.length) {
 
             this.content[this.nElements] = element;
-            this.nElements++;
+            this.increaseElements();
 
             return true;
 
@@ -117,7 +118,7 @@ public class Container {
 
             if (index == this.nElements) {
 
-                this.nElements++;
+                this.increaseElements();
 
             }
 
@@ -142,7 +143,7 @@ public class Container {
                 }
 
                 this.content[index] = element;
-                this.nElements++;
+                this.increaseElements();
 
                 return true;
 
@@ -282,7 +283,7 @@ public class Container {
 
             }
 
-            this.nElements--;
+            this.decreaseElements();
             this.removeIfEmpty();
 
             return o;
@@ -300,7 +301,6 @@ public class Container {
             if (this.content[i] == o) {
 
                 this.remove(i);
-                this.removeIfEmpty();
 
                 return true;
 
@@ -321,6 +321,20 @@ public class Container {
 
         }
 
+    }
+    
+    private void increaseElements() {
+        
+        this.nElements++;
+        this.list.increaseSize();
+        
+    }
+    
+    private void decreaseElements() {
+        
+        this.nElements--;
+        this.list.decreaseSize();
+        
     }
 
 }

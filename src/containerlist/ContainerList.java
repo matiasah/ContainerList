@@ -16,6 +16,7 @@ import java.util.ListIterator;
  */
 public class ContainerList<E> implements List {
 
+    private int size = 0;
     private int containerElements = 0;
     private Container first;
     private Container last;
@@ -29,13 +30,7 @@ public class ContainerList<E> implements List {
     @Override
     public int size() {
 
-        if (this.last != null) {
-
-            return this.last.getIndex() + this.last.getSize();
-
-        }
-
-        return 0;
+        return this.size;
 
     }
 
@@ -77,7 +72,32 @@ public class ContainerList<E> implements List {
 
     @Override
     public Object[] toArray(Object[] a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Class arrayClass = a.getClass();
+        Container current = this.first;
+        int j = 0;
+
+        while (current != null) {
+
+            for (int i = 0; i < current.getSize(); i++) {
+
+                Object element = current.get(i);
+
+                if (arrayClass.equals(element.getClass())) {
+
+                    a[j] = element;
+                    j++;
+
+                }
+
+            }
+
+            current = current.getNext();
+
+        }
+
+        return a;
+
     }
 
     @Override
@@ -128,7 +148,11 @@ public class ContainerList<E> implements List {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+
     }
 
     @Override
@@ -163,10 +187,10 @@ public class ContainerList<E> implements List {
                 this.first = new Container(this, this.containerElements);
                 this.last = this.first;
 
-            }else{
-                
+            } else {
+
                 throw new IndexOutOfBoundsException();
-                
+
             }
 
         }
@@ -182,7 +206,7 @@ public class ContainerList<E> implements List {
                 return current.set(index, element);
 
             }
-            
+
             current = current.getNext();
 
         }
@@ -338,7 +362,44 @@ public class ContainerList<E> implements List {
 
     @Override
     public List subList(int fromIndex, int toIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if ( fromIndex < 0 || toIndex > this.size || fromIndex > toIndex) {
+            
+            throw new IndexOutOfBoundsException();
+            
+        }
+
+        ContainerList list = new ContainerList(this.containerElements);
+        Container current = this.first;
+        int j = 0;
+
+        while (current != null) {
+            
+            int currentSize = current.getSize();
+
+            if (fromIndex <= currentSize && currentSize <= toIndex) {
+                
+                int maxSize = Math.min( current.getSize(), toIndex + 1);
+                int minSize = Math.max(fromIndex, 0);
+                
+                for (int i = minSize; i < maxSize; i++) {
+                    
+                    list.set(j, current.get(i));
+                    
+                    j++;
+                    
+                }
+
+            }
+
+            fromIndex = fromIndex - currentSize;
+            toIndex = toIndex - currentSize;
+            current = current.getNext();
+
+        }
+
+        return list;
+
     }
 
     @Override
@@ -430,6 +491,18 @@ public class ContainerList<E> implements List {
         }
 
         return count;
+
+    }
+
+    public void increaseSize() {
+
+        this.size++;
+
+    }
+
+    public void decreaseSize() {
+
+        this.size--;
 
     }
 
