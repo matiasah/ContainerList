@@ -30,6 +30,13 @@ public class Main {
         System.out.println("Array: " + Arrays.toString(cont.toArray()));
         System.out.println("Containers: " + cont.countContainers());
         System.out.println("Size: " + cont.size());
+        System.out.println("Position of 6: " + cont.indexOf(6));
+        
+        for (Object o : cont) {
+            
+            System.out.println("Object: "+o);
+            
+        }
         
     }
     

@@ -109,6 +109,12 @@ public class Container {
     }
 
     public Object set(int index, Object element) {
+        
+        if ( element == null ) {
+            
+            return this.remove(index);
+            
+        }
 
         if (index < this.nElements || (index == this.nElements && this.nElements < this.content.length)) {
 

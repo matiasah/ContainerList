@@ -36,7 +36,9 @@ public class ContainerList<E> implements List {
 
     @Override
     public Iterator iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return new ContainerIterator(this);
+        
     }
 
     @Override
@@ -352,12 +354,16 @@ public class ContainerList<E> implements List {
 
     @Override
     public ListIterator listIterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return new ContainerListIterator(this);
+        
     }
 
     @Override
     public ListIterator listIterator(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return new ContainerListIterator(this, index);
+        
     }
 
     @Override
@@ -504,6 +510,18 @@ public class ContainerList<E> implements List {
 
         this.size--;
 
+    }
+    
+    public Container getFirstContainer() {
+        
+        return this.first;
+        
+    }
+    
+    public int getContainerElements() {
+        
+        return this.containerElements;
+        
     }
 
 }
