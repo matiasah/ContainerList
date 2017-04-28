@@ -26,23 +26,23 @@ public class ContainerList<E> implements List {
         this.containerElements = containerElements;
 
     }
-    
+
     public ContainerList(ContainerList list) {
-        
+
         this.containerElements = list.getContainerElements();
         this.first = new Container(list.getFirstContainer());
-        
+
         Container current = this.first;
-        
-        while ( current != null ) {
-            
+
+        while (current != null) {
+
             this.size = this.size + current.getSize();
             this.last = current;
-            
+
             current = current.getNext();
-            
+
         }
-        
+
     }
 
     @Override
@@ -54,9 +54,9 @@ public class ContainerList<E> implements List {
 
     @Override
     public Iterator iterator() {
-        
+
         return new ContainerIterator(this);
-        
+
     }
 
     @Override
@@ -103,7 +103,7 @@ public class ContainerList<E> implements List {
 
                 Object element = current.get(i);
 
-                if (arrayClass.equals(element.getClass())) {
+                if (element.getClass().isAssignableFrom(arrayClass)) {
 
                     a[j] = element;
                     j++;
@@ -372,25 +372,25 @@ public class ContainerList<E> implements List {
 
     @Override
     public ListIterator listIterator() {
-        
+
         return new ContainerListIterator(this);
-        
+
     }
 
     @Override
     public ListIterator listIterator(int index) {
-        
+
         return new ContainerListIterator(this, index);
-        
+
     }
 
     @Override
     public List subList(int fromIndex, int toIndex) {
-        
-        if ( fromIndex < 0 || toIndex > this.size || fromIndex > toIndex) {
-            
+
+        if (fromIndex < 0 || toIndex > this.size || fromIndex > toIndex) {
+
             throw new IndexOutOfBoundsException();
-            
+
         }
 
         ContainerList list = new ContainerList(this.containerElements);
@@ -398,20 +398,20 @@ public class ContainerList<E> implements List {
         int j = 0;
 
         while (current != null) {
-            
+
             int currentSize = current.getSize();
 
             if (fromIndex <= currentSize && currentSize <= toIndex) {
-                
-                int maxSize = Math.min( current.getSize(), toIndex + 1);
+
+                int maxSize = Math.min(current.getSize(), toIndex + 1);
                 int minSize = Math.max(fromIndex, 0);
-                
+
                 for (int i = minSize; i < maxSize; i++) {
-                    
+
                     list.set(j, current.get(i));
-                    
+
                     j++;
-                    
+
                 }
 
             }
@@ -529,17 +529,17 @@ public class ContainerList<E> implements List {
         this.size--;
 
     }
-    
+
     public Container getFirstContainer() {
-        
+
         return this.first;
-        
+
     }
-    
+
     public int getContainerElements() {
-        
+
         return this.containerElements;
-        
+
     }
 
 }
