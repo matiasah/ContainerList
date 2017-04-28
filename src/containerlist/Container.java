@@ -45,7 +45,7 @@ public class Container {
 
         if (cont.getNext() != null) {
 
-            this.next = new Container(cont.getNext());
+            this.next = new Container(cont.getNext(), this);
 
         }
 
