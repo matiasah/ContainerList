@@ -21,7 +21,7 @@ public class Main {
         
         ContainerList cont = new ContainerList(5);
         
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             
             cont.set(i, i);
             
@@ -37,6 +37,16 @@ public class Main {
             System.out.println("Object: "+o);
             
         }
+        
+        ContainerList cont2 = new ContainerList(cont);
+        
+        for (Object o : cont2) {
+            
+            System.out.println("Object 2: " + o);
+            
+        }
+        
+        System.out.println("Size: " + cont2.size());
         
     }
     

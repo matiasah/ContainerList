@@ -17,14 +17,42 @@ public class Container {
     private int nElements;
     private Object[] content;
 
-    public int min;
-    public int max;
-
     public Container(ContainerList list, int elements) {
 
         this.list = list;
         this.content = new Object[elements];
 
+    }
+
+    public Container(Container cont) {
+
+        this.list = cont.getList();
+
+        if (cont.getNext() != null) {
+
+            this.next = new Container(cont.getNext(), this);
+
+        }
+
+        this.nElements = cont.getSize();
+        this.content = cont.copyArray();
+
+    }
+    
+    private Container(Container cont, Container previous) {
+        
+        this.list = cont.getList();
+
+        if (cont.getNext() != null) {
+
+            this.next = new Container(cont.getNext());
+
+        }
+
+        this.previous = previous;
+        this.nElements = cont.getSize();
+        this.content = cont.copyArray();
+        
     }
 
     public Object getElement(int index) {
@@ -109,11 +137,11 @@ public class Container {
     }
 
     public Object set(int index, Object element) {
-        
-        if ( element == null ) {
-            
+
+        if (element == null) {
+
             return this.remove(index);
-            
+
         }
 
         if (index < this.nElements || (index == this.nElements && this.nElements < this.content.length)) {
@@ -318,6 +346,20 @@ public class Container {
 
     }
 
+    public Object[] copyArray() {
+
+        Object copiedContent[] = new Object[this.content.length];
+
+        for (int i = 0; i < copiedContent.length; i++) {
+
+            copiedContent[i] = this.content[i];
+
+        }
+
+        return copiedContent;
+
+    }
+
     private void removeIfEmpty() {
 
         if (this.nElements == 0) {
@@ -328,19 +370,25 @@ public class Container {
         }
 
     }
-    
+
     private void increaseElements() {
-        
+
         this.nElements++;
         this.list.increaseSize();
-        
+
     }
-    
+
     private void decreaseElements() {
-        
+
         this.nElements--;
         this.list.decreaseSize();
-        
+
+    }
+
+    private ContainerList getList() {
+
+        return this.list;
+
     }
 
 }

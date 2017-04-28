@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/GitHub/ContainerList/src/containerlist/Main.java</file>
+            <file>file:/D:/GitHub/ContainerList/src/containerlist/Container.java</file>
             <file>file:/D:/GitHub/ContainerList/src/containerlist/ContainerList.java</file>
+            <file>file:/D:/GitHub/ContainerList/src/containerlist/ContainerListIterator.java</file>
         </group>
     </open-files>
 </project-private>

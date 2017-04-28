@@ -26,6 +26,24 @@ public class ContainerList<E> implements List {
         this.containerElements = containerElements;
 
     }
+    
+    public ContainerList(ContainerList list) {
+        
+        this.containerElements = list.getContainerElements();
+        this.first = new Container(list.getFirstContainer());
+        
+        Container current = this.first;
+        
+        while ( current != null ) {
+            
+            this.size = this.size + current.getSize();
+            this.last = current;
+            
+            current = current.getNext();
+            
+        }
+        
+    }
 
     @Override
     public int size() {
