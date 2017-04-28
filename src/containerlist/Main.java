@@ -21,14 +21,15 @@ public class Main {
         
         ContainerList cont = new ContainerList(5);
         
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 10; i++) {
             
             cont.set(i, i);
             
         }
         
-        System.out.println(Arrays.toString(cont.toArray()));
-        System.out.println(cont.countContainers());
+        System.out.println("Array: " + Arrays.toString(cont.toArray()));
+        System.out.println("Containers: " + cont.countContainers());
+        System.out.println("Size: " + cont.size());
         
     }
     
